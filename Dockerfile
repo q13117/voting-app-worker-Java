@@ -1,4 +1,4 @@
-FROM maven:3.6-jdk-8-alpine as builder
+FROM maven:3.5-jdk-8-alpine 
 
 WORKDIR /code
 
@@ -12,6 +12,6 @@ RUN ["mvn", "package"]
 
 FROM openjdk:8-jre-alpine
 
-COPY --from=builder /code/target/worker-jar-with-dependencies.jar /
+COPY /code/target/worker-jar-with-dependencies.jar /
 
 CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "/worker-jar-with-dependencies.jar"]
