@@ -12,6 +12,6 @@ RUN ["mvn", "package"]
 
 FROM openjdk:8-jre-alpine
 
-COPY --from=1 /code/target/worker-jar-with-dependencies.jar /
+COPY --from=1/10 /code/target/worker-jar-with-dependencies.jar /
 
 CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "/worker-jar-with-dependencies.jar"]
